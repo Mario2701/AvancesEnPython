@@ -1,0 +1,19 @@
+{% extends 'layout.html' %} # hereda la plantilla layout
+{% import 'macros.html' as macros %}
+{% block titulo %}
+    <title>Pagina Principal</title>
+{% endblock %}
+{% block contenido %}
+    
+    <div class="container">
+        <h1>PAGINA PRINCIPAL</h1>
+        <div class="row">
+        {% for oferta in ofertas %}
+        <div class="col-sm">
+            {{macros.mostrar_oferta(oferta)}}
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

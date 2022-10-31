@@ -64,27 +64,44 @@ while (op != "5"):
                 
     elif (op == "3"):
         print("[3] ACTUALIZAR ALUMNO")
-        
-        buscar = int(input("Ingrese el numero de registro del alumno: "))
-        nombre = input("Nombre: ")
-        email = input("Email: ")
-        celular = input("Celular: ")
-        dicNuevoAlumno = {
-            'nombre': nombre,
-            'email': email,
-            'celular': celular
-        }
-        listaAlumnos[buscar] = dicNuevoAlumno
-        print("DATOS DEL ALUMNO ACTUALIZADOS CON EXITO")
-        print(listaAlumnos)
-        
+        #PASO 1: buscar por el email el diccionario a editar
+        valorBusqueda = input('Ingrese el email del alumno a actualizar: ')
+        for contador in range(len(listaAlumnos)):
+            dicAlumno = listaAlumnos[contador]
+            for a,b in dicAlumno.items():
+                if(a == 'email' and b == valorBusqueda):
+                    posicionBusqueda = contador
+                    break
+                
+        if(posicionBusqueda == -1):
+            print('ALUMNO NO ENCONTRADO')
+        else:
+            print("ALUMNO ENCONTRADO : " + listaAlumnos[posicionBusqueda].get("nombre"))
+            print("INGRESE NUEVOS VALORES PARA EL ALUMNO ENCONTRADO")
+            
+            nombre = input('NUEVO NOMBRE : ')
+            if(nombre == ''):
+                nombre = listaAlumnos[posicionBusqueda].get("nombre")
+                
+            email = input('NUEVO EMAIL : ')
+            if(email == ''):
+                email = listaAlumnos[posicionBusqueda].get('email')
+                
+            celular = input('NUEVO CELULAR : ')
+            if(celular == ''):
+                celular = listaAlumnos[posicionBusqueda].get('celular')
+                
+            dicAlumnoEditar = {
+                'nombre':nombre,
+                'email':email,
+                'celular':celular
+            }
+            #actualizamos el diccionario en la lista
+            listaAlumnos[posicionBusqueda] = dicAlumnoEditar
+            print('ALUMNO ACTUALIZADO !!!')
     elif (op == "4"):
         print("[4] ELIMINAR ALUMNO")
-        buscar = int(input("Ingrese el numero de registro del alumno a eliminar: "))
-        listaAlumnos.pop(buscar)
-        print("DATOS DEL ALUMNO ELIMINADOS CON EXITO")
-        print('=' * 20)
-        print(listaAlumnos)
+        
     elif (op == "5"):
         print("[5] ESTA SALIENDO DEL PROGRAMA...")
     else:
